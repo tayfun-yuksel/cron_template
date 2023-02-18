@@ -2,50 +2,44 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./main.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-    <style>
-      th {
-        background-color: #343a40;
-        color: #fff;
-      }
-    
-    </style>
   </head>
   <body>
     <div class="m-3">
-      <div class="title">
+      <div class="header">
         <h1>CRON MANAGER</h1>
-    </div>
-    <div class="buttons">
-        <button class="btn btn-primary" id="create">CREATE</button>
-          <button class="btn btn-secondary" id="clear" style="display: none;" onclick="clearCheckBoxes()">Clear</button>
-          <button class="btn btn-danger" id="delete" style="display: none;">Delete</button>
       </div>
-    <div class="table-container">
-        <table class="table table-sortable" id="table">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Schedule</th>
-                <th>Success-Count</th>
-                <th>Error-Count</th>
-                <th>LastSuccess</th>
-                <th>LastError</th>
-                <th>Enabled</th>
-                <th>Retries</th>
-                <th>Next</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-    </div>
+      <div class="buttons-search-container">
+          <button class="btn btn-outline-primary" id="create">NEW</button>
+          <button class="btn btn-outline-secondary" id="clear" style="display: none;" onclick="onChecked()">Deselect</button>
+          <button class="btn btn-outline-danger" id="delete" style="display: none;">Delete</button>
+          <input type="search" class="form-control" placeholder="Search" id="table-search">
+      </div>
+      <div class="table-container">
+          <table class="table table-sortable" id="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Status</th>
+                  <th>Schedule</th>
+                  <th>Success-Count</th>
+                  <th> Error-Count</th>
+                  <th>LastSuccess</th>
+                  <th>LastError</th>
+                  <th>Enabled</th>
+                  <th>Retries</th>
+                  <th>Next</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="cron-table-body">
+              </tbody>
+            </table>
+      </div>
     </div>
     
 

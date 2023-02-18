@@ -1,6 +1,13 @@
-
 .table-sortable th {
 	cursor: pointer;
+	background-color: #343a40;
+	color: #fff;
+}
+
+.edit-icon{
+	cursor: pointer;
+	width: 2em;
+	height: 2em;
 }
 
 .table-sortable .th-sort-asc::after {
@@ -11,12 +18,15 @@
 	content: "\25be";
 }
 
-.table-sortable .th-sort-asc::after,
-.table-sortable .th-sort-desc::after {
-	margin-left: 5px;
+.header{
+	display: flex;
+	justify-content: center;
 }
 
-.table-sortable .th-sort-asc,
-.table-sortable .th-sort-desc {
-	background: rgba(0, 0, 0, 0.1);
+.buttons-search-container{
+	display: flex;
+}
+
+.buttons-search-container button{
+	margin-right: 3px;
 }

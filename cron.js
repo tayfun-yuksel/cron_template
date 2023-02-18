@@ -17,7 +17,7 @@ function generateMockData(){
     
     // ... add more items here
   ];
-  let statusList = ["Waiting", "Failed", "Enabled", "Disabled"]
+  let statusList = ["Success", "Failed"]
   let scheduleList = ["Daily", "Hourly", "Weekly", "Monthly"]
   for (let index = 0; index < 40; index++) {
     // Generate a random uppercase letter from A to Z
@@ -26,7 +26,7 @@ function generateMockData(){
         {
           Id: index,
           Name: "Task " + randomLetter,
-          Status: statusList[Math.floor(Math.random()*4)],
+          Status: statusList[Math.floor(Math.random()*2)],
           Schedule: scheduleList[Math.floor(Math.random()*4)],
           "Success-Count": 5,
           "Error-Count": 0,
@@ -42,8 +42,7 @@ function generateMockData(){
 }
 
 
-
-//event for check boxes when one of the rows toggled
+//events
 function addEventListenerCheckbox(){
   table.addEventListener("change", (event) => {
     const checkbox = event.target;
@@ -60,32 +59,6 @@ function addEventListenerCheckbox(){
   });
 }
   
-
-function createCheckBox(){
-  const checkboxTd = document.createElement("td");
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkboxTd.appendChild(checkbox);
-  addEventListenerCheckbox();
-
-  return checkboxTd;
-}
-
-
-function createEditButton(item){
-  const editButton = document.createElement("button");
-  editButton.className = "btn btn-primary";
-  editButton.textContent = "Edit";
-  editButton.addEventListener("click", () => {
-          window.location.href = "edit.html?id=" + item.Id;
-          sessionStorage.setItem("editCronItem", JSON.stringify(item));
-      });
-  const editButtonTd = document.createElement("td");
-  editButtonTd.appendChild(editButton);
-  return editButtonTd;
-}
-
-
 function addEventListenerToCreateButton(){
   createButton.addEventListener("click", () => {
     window.location.href = "edit.html";
@@ -105,6 +78,75 @@ function addEventListenerToDeleteButton() {
     deleteButton.style.display = "none";
   });
 }
+
+function addEventListenerToSearchInput(){
+  const searchInput = document.getElementById('table-search');
+  const table = document.getElementById('cron-table-body');
+  const rows = table.getElementsByTagName('tr');
+
+  searchInput.addEventListener('input', function(event) {
+    const searchTerm = event.target.value.toLowerCase();
+
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const cells = row.getElementsByTagName('td');
+      let shouldDisplay = false;
+
+      for (let j = 0; j < cells.length; j++) {
+        const cellText = cells[j].textContent.toLowerCase();
+        if (cellText.indexOf(searchTerm) > -1) {
+          shouldDisplay = true;
+          break;
+        }
+      }
+
+      if (shouldDisplay) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    }
+  });
+
+}
+
+function onChecked(){
+  $('input[type="checkbox"]:checked').prop('checked',false);
+  clearButton.style.display = "none";
+  deleteButton.style.display = "none";
+}
+
+//end of events
+
+function createCheckBox(){
+  const checkboxTd = document.createElement("td");
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkboxTd.appendChild(checkbox);
+  addEventListenerCheckbox();
+
+  return checkboxTd;
+}
+
+
+function createEditIcon(item){
+  const edit = document.createElement("img");
+  edit.className = "edit-icon";
+  edit.setAttribute("src", "./edit.svg")
+  edit.addEventListener("click",  () => {
+    window.location.href = "edit.html?id=" + item.Id;
+    sessionStorage.setItem("editCronItem", JSON.stringify(item));
+  });
+
+  const editTd = document.createElement("td");
+  editTd.appendChild(edit);
+  return editTd;
+}
+
+
+
+
+
 
 
 
@@ -128,24 +170,17 @@ function constructTable(){
     
     fillRow(tr, item);
     // edit button for each row
-    const  editButtonTd =  createEditButton(item);
-    tr.appendChild(editButtonTd);
+    const  editTd =  createEditIcon(item);
+    tr.appendChild(editTd);
     table.appendChild(tr);
   }
 }
  
 
-function clearCheckBoxes(){
-    $('input[type="checkbox"]:checked').prop('checked',false);
-    clearButton.style.display = "none";
-    deleteButton.style.display = "none";
-}
-
-
-
 generateMockData();
 constructTable();
 addEventListenerToCreateButton();
 addEventListenerToDeleteButton();
+addEventListenerToSearchInput();
 //   export default data;
   
