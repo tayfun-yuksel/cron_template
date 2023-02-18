@@ -15,6 +15,12 @@
           <button class="btn btn-outline-secondary" id="clear" style="display: none;" onclick="onChecked()">Deselect</button>
           <button class="btn btn-outline-danger" id="delete" style="display: none;">Delete</button>
           <input type="search" class="form-control" placeholder="Search" id="table-search">
+          <select id="dropdownMenu" class="form-select ml-1" style="border-radius: 6%;">
+            <option selected>Server 0</option>
+            <option value="option1">Server 1</option>
+            <option value="option2">Server 2</option>
+            <option value="option3">Server 3</option>
+          </select>
       </div>
       <div class="table-container">
           <table class="table table-sortable" id="table">
@@ -23,15 +29,15 @@
                   <th></th>
                   <th>Id</th>
                   <th>Name</th>
-                  <th>Status</th>
                   <th>Schedule</th>
                   <th>Success-Count</th>
-                  <th> Error-Count</th>
+                  <th>Error-Count</th>
                   <th>LastSuccess</th>
                   <th>LastError</th>
                   <th>Enabled</th>
                   <th>Retries</th>
                   <th>Next</th>
+                  <th>Status</th>
                   <th></th>
                   <th></th>
                 </tr>

@@ -26,15 +26,15 @@ function generateMockData(){
         {
           Id: index,
           Name: "Task " + randomLetter,
-          Status: statusList[Math.floor(Math.random()*2)],
           Schedule: scheduleList[Math.floor(Math.random()*4)],
-          "Success-Count": 5,
-          "Error-Count": 0,
+          "Success-Count": Math.floor(Math.random()*40),
+          "Error-Count": Math.floor(Math.random()*20),
           LastSuccess: formatDate(new Date()),
           LastError: formatDate(new Date()),
           Enabled: true,
           Retries: 3,
-          Next: "2023-02-14"
+          Next: "2023-02-14",
+          Status: statusList[Math.floor(Math.random()*2)],
         },
       );
   }
@@ -144,20 +144,29 @@ function createEditIcon(item){
 }
 
 
-
-
-
-
-
-
 function fillRow(tr, cronData){
   for (const key in cronData) {
     const td = document.createElement("td");
+    if(key === "Status"){
+      if(cronData[key] == "Success"){
+          const checkIcon = document.createElement("img");
+          checkIcon.className = "success-icon";
+          checkIcon.setAttribute("src", "./success.svg")
+          td.appendChild(checkIcon);
+      }else{
+        const checkIcon = document.createElement("img");
+          checkIcon.className = "fail-icon";
+          checkIcon.setAttribute("src", "./fail.svg")
+          td.appendChild(checkIcon);
+      }
+      td.setAttribute("id", key);
+      tr.appendChild(td);
+      continue;
+    }
     td.textContent = cronData[key];
     td.setAttribute("id", key)
     tr.appendChild(td);
   }
-
 }
 
 function constructTable(){

@@ -10,6 +10,17 @@
 	height: 2em;
 }
 
+.fail-icon{
+	width: 1em;
+	height: 1em;
+}
+
+
+.success-icon{
+	width: 1em;
+	height: 1em;
+}
+
 .table-sortable .th-sort-asc::after {
 	content: "\25b4";
 }
@@ -30,3 +41,5 @@
 .buttons-search-container button{
 	margin-right: 3px;
 }
+
+  
